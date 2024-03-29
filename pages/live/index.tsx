@@ -1,17 +1,17 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import FloatingButton from "../../components/floating-button";
-import Layout from "../../components/layout";
+import FloatingButton from "@components/floating-button";
+import Layout from "@components/layout";
 
 const Live: NextPage = () => {
   return (
     <Layout hasTabBar title="라이브">
-      <div className=" divide-y-[1px] space-y-4">
+      <div className=" space-y-4 divide-y-[1px]">
         {[1, 1, 1, 1, 1, 1, 1].map((_, i) => (
           <Link key={i} href={`/live/${i}`}>
-            <a className="pt-4 block  px-4">
-              <div className="w-full rounded-md shadow-sm bg-slate-300 aspect-video" />
-              <h1 className="text-2xl mt-2 font-bold text-gray-900">
+            <a className="block px-4  pt-4">
+              <div className="aspect-video w-full rounded-md bg-slate-300 shadow-sm" />
+              <h1 className="mt-2 text-2xl font-bold text-gray-900">
                 Galaxy S50
               </h1>
             </a>
@@ -19,7 +19,7 @@ const Live: NextPage = () => {
         ))}
         <FloatingButton href="/live/create">
           <svg
-            className="w-6 h-6"
+            className="h-6 w-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
