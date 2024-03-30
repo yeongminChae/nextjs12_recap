@@ -1,11 +1,13 @@
 import { useState } from "react";
 
-export default function useMutation(
-  url: string
-): [
-  (data: any) => void,
-  { loading: boolean; data: undefined | any; error: undefined | any }
-] {
+interface MutationState {
+  loading: boolean;
+  data?: object;
+  error?: object;
+}
+type Mutation = [(data: any) => void, MutationState];
+
+export default function useMutation(url: string): Mutation {
   const [state, setState] = useState({
     loading: false,
     data: undefined,
@@ -27,3 +29,5 @@ export default function useMutation(
   }
   return [mutation, { ...state }];
 }
+
+// useMutation은 클라이언트 측에서 사용자의 인터랙션(예: 폼 제출)에 따라 서버로 데이터를 비동기적으로 보내고, 그 과정에서의 상태(로딩, 성공, 오류)를 관리하는 것을 도와주는 React 훅입니다.
