@@ -16,3 +16,5 @@ export default async function withHandler(
     }
   };
 }
+
+// withHandler는 서버 측에서 특정 HTTP 메소드(예: POST)로만 요청을 받아들이고, 그 외의 요청에 대해서는 거부하는 것을 도와주는 Next.js의 미들웨어 함수입니다.
