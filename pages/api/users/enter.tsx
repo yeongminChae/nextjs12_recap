@@ -35,21 +35,21 @@ async function handler(
   });
 
   if (phone) {
-    await twilioClient.messages.create({
-      messagingServiceSid: process.env.TWILIO_SERVICE_SID,
-      to: process.env.MY_PHONE!,
-      body: `Your token is ${payload}`,
-    });
+    // await twilioClient.messages.create({
+    //   messagingServiceSid: process.env.TWILIO_SERVICE_SID,
+    //   to: process.env.MY_PHONE!,
+    //   body: `Your token is ${payload}`,
+    // });
   }
   if (email) {
-    const email = await mail.send({
-      to: "codudals98@naver.com",
-      from: "codudals98@naver.com",
-      subject: "Carrot Token",
-      text: `Your token is ${payload}`,
-      html: `<strong> Your token is ${payload} </strong>`,
-    });
-    console.log(email);
+    // const email = await mail.send({
+    //   to: "codudals98@naver.com",
+    //   from: "codudals98@naver.com",
+    //   subject: "Carrot Token",
+    //   text: `Your token is ${payload}`,
+    //   html: `<strong> Your token is ${payload} </strong>`,
+    // });
+    // console.log(email);
   }
 
   return res.json({ ok: true });
