@@ -2,6 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import client from "@libs/server/client";
 import withHandler from "@libs/server/withHandler";
 import { ResponseType } from "@libs/server/withHandler";
+import twilio from "twilio";
+import mail from "@sendgrid/mail";
+
+const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+mail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 async function handler(
   req: NextApiRequest,
@@ -28,6 +33,24 @@ async function handler(
       },
     },
   });
+
+  if (phone) {
+    await twilioClient.messages.create({
+      messagingServiceSid: process.env.TWILIO_SERVICE_SID,
+      to: process.env.MY_PHONE!,
+      body: `Your token is ${payload}`,
+    });
+  }
+  if (email) {
+    const email = await mail.send({
+      to: "codudals98@naver.com",
+      from: "codudals98@naver.com",
+      subject: "Carrot Token",
+      text: `Your token is ${payload}`,
+      html: `<strong> Your token is ${payload} </strong>`,
+    });
+    console.log(email);
+  }
 
   return res.json({ ok: true });
 }
