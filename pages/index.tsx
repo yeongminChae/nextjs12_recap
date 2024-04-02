@@ -8,9 +8,15 @@ import Head from "next/head";
 import products from "./api/products";
 import { Product } from "@prisma/client";
 
+interface ProductResponseWithCount extends Product {
+  _count: {
+    favs: number;
+  };
+}
+
 interface ProductResponse {
   ok: boolean;
-  products: Product[];
+  products: ProductResponseWithCount[];
 }
 
 const Home: NextPage = () => {
@@ -21,7 +27,7 @@ const Home: NextPage = () => {
       <Head>
         <title>HOME</title>
       </Head>
-      
+
       <div className="flex flex-col space-y-5 divide-y">
         {data?.products?.map((product) => (
           <Item
@@ -30,7 +36,7 @@ const Home: NextPage = () => {
             title={product.name}
             price={product.price}
             comments={1}
-            hearts={1}
+            hearts={product._count?.favs}
           />
         ))}
         <FloatingButton href="/products/upload">
