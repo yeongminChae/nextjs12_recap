@@ -6,7 +6,7 @@ import { withApiSession } from "@libs/server/withSession";
 
 async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseType>
+  res: NextApiResponse<ResponseType>,
 ) {
   const { id } = req.query;
 
@@ -25,26 +25,26 @@ async function handler(
     },
   });
 
-  const searchTerms = product?.name.split(" ").map(word => ({
+  const searchTerms = product?.name.split(" ").map((word) => ({
     name: {
-        contains: word
-    }
-  })); 
+      contains: word,
+    },
+  }));
   const relatedProducts = await client.product.findMany({
     where: {
-        OR: searchTerms,
-        AND: {
-            id: {
-                not: product?.id
-            }
-        }
-    }
-  })
+      OR: searchTerms,
+      AND: {
+        id: {
+          not: product?.id,
+        },
+      },
+    },
+  });
 
   res.json({
     ok: true,
     product,
-    relatedProducts
+    relatedProducts,
   });
 }
 
@@ -52,5 +52,5 @@ export default withApiSession(
   withHandler({
     methods: ["GET"],
     handler,
-  })
+  }),
 );
