@@ -28,27 +28,21 @@ const Upload: NextPage = () => {
 
   const onValid = (data: UploadProductsForm) => {
     if (loading) return;
-    console.log(`in onValid `);
-    console.log(data);
-    console.log(`in onValid `);
     uploadProduct(data);
   };
 
   useEffect(() => {
-    console.log(`in useEffect`);
-    console.log(data);
-    console.log(`in useEffect`);
     if (data?.ok) {
       router.push(`/products/${data.product.id}`);
     }
   }, [data, router]);
   return (
     <Layout canGoBack title="Upload Product">
-      <form className="space-y-4 p-4" onSubmit={handleSubmit(onValid)}>
+      <form className="p-4 space-y-4" onSubmit={handleSubmit(onValid)}>
         <div>
-          <label className="flex h-48 w-full cursor-pointer items-center justify-center rounded-md border-2 border-dashed border-gray-300 text-gray-600 hover:border-orange-500 hover:text-orange-500">
+          <label className="flex items-center justify-center w-full h-48 text-gray-600 border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-orange-500 hover:text-orange-500">
             <svg
-              className="h-12 w-12"
+              className="w-12 h-12"
               stroke="currentColor"
               fill="none"
               viewBox="0 0 48 48"
