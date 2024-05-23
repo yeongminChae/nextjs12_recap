@@ -29,7 +29,7 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="flex flex-col space-y-5 divide-y">
-        {data?.products?.map((product) => (
+        {data?.products?.map((product: ProductResponse) => (
           <Item
             id={product.id}
             key={product.id}
